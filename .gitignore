@@ -76,11 +76,15 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-
+.DS_Store
 # IPython
 profile_default/
 ipython_config.py
-
+imgages/
+html/
+word/
+audio/
+final_audio.mp3
 # pyenv
 .python-version
 

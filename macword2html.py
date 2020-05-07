@@ -5,6 +5,12 @@ import shutil
 from pydocx import PyDocX
 import re
 from bs4 import BeautifulSoup, Comment
+from pydocx.export import PyDocXHTMLExporter
+from pydocx.export.numbering_span import BaseNumberingSpanBuilder
+
+
+class CustomExporter(PyDocXHTMLExporter):
+    numbering_span_builder_class = BaseNumberingSpanBuilder
 
 
 def init():
@@ -45,14 +51,18 @@ def main(word_dir, html_dir, word_name):
 
 # doc_path - word 文档地址 export_path - 导出的 html 地址
 def word_to_html(doc_path, export_path):
-    html = PyDocX.to_html(doc_path)
-    f = open(export_path, 'w', encoding="utf-8")
-    f.write(html)
-    f.close()
-    fr = open(export_path, 'r')
-    str = fr.read()
-    fr.close()
-    return str
+    # html = PyDocX.to_html(doc_path)
+    print(CustomExporter.numbering_span_builder_class)
+    exporter = CustomExporter(doc_path)
+    html = exporter.export()
+    return html
+    # f = open(export_path, 'w', encoding="utf-8")
+    # f.write(html)
+    # f.close()
+    # fr = open(export_path, 'r')
+    # str = fr.read()
+    # fr.close()
+    # return str
 
 
 # 格式化html
